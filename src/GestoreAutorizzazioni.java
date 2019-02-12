@@ -52,6 +52,14 @@ public class GestoreAutorizzazioni {
         chains.add(newChain);
     }
 
+    public void deleteChain(String nome){
+        for(ChainHash ch:this.chains){
+            if(ch.getName() == nome){
+                this.chains.remove(ch);
+                break;
+            }
+        }
+    }
 
     //todo: allow specification of a final thingy
     public void startAuthorizationChain(String name, Document document){

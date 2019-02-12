@@ -3,14 +3,14 @@ import AuthorizationMechanism.Authorizer;
 import AuthorizationMechanism.Clearance;
 import Container.Document;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 //"End" as in limit case
 //Note: though authorizer is an abstract class it's not
-public class EndEntity implements Entity, Observer {
-    private int id;
-    private String name;
+public class EndEntity extends Entity implements Observer {
+
 
     public EndEntity(String name, int id){
         this.name = name;
@@ -48,18 +48,22 @@ public class EndEntity implements Entity, Observer {
         throw new UnsupportedOperationException();
     }
 
-
+    @Override
+    public ArrayList<Entity> getChildren_safe(){ return null; }
 
     @Override
     public Clearance handleClearanceRequest(Document document, boolean isLast) {
-        Clearance clr = Entity.super.handleClearanceRequest(document, isLast);
+        Clearance clr = super.handleClearanceRequest(document, isLast);
         //todo to be completed
         document.addObserver(this);
         return clr;
     }
 
     @Override
+    public boolean isEnd(){ return true; }
+
+    @Override
     public void update(Observable observable, Object o) {
-        Entity.super.update(observable, o);
+        super.update(observable, o);
     }
 }

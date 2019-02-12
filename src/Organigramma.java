@@ -4,7 +4,7 @@ import structure.Entity;
 
 import java.util.ArrayList;
 /*  Struttura organigramma:
-*   0. CTO:
+*   0. CEO:
 *       1. CMO
 *       2. CTO
 *           11. Reparto tecnico
@@ -66,6 +66,31 @@ public class Organigramma {
         organico.get(7).addChild(organico.get(9));
 
     }
+
+    public void printGerarchia(){
+        ArrayList<Entity> e = new ArrayList<Entity>();
+        e.add(ceo);
+        printGerarchia_rec(e, "");
+
+    }
+
+    private void printGerarchia_rec(ArrayList<Entity> entities, String tabs){
+        if(entities == null){
+            return;
+        }
+        String newTabs = tabs + "\t";
+        ArrayList<Entity> entita = null;
+
+        for(Entity ent:entities){
+            System.out.println(tabs + ent.getName() + ", ID: " + ent.getId());
+            if(!ent.isEnd())
+                entita = new ArrayList<Entity>(ent.getChildren_safe());
+            //entita.add(ent);
+            this.printGerarchia_rec(entita, newTabs);
+        }
+
+    }
+
 
     public Entity findEntity(int id){
         for(Entity e:this.organico){

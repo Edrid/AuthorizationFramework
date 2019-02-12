@@ -18,7 +18,9 @@ public class Main {
         list.add(1);
         list.add(0);
 
-        gestore.makeChain("FirstChain", list);
+        organigramma.printGerarchia();
+
+        gestore.makeChain("FirstChain", list); //this is the output
         Document document = new Document("Edoardo");
         gestore.startAuthorizationChain("FirstChain", document);
     }

@@ -8,11 +8,8 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
 
-public class Aggregate implements Entity, Observer {
+public class Aggregate extends Entity implements Observer {
     private ArrayList<Entity> subEntities;
-    private int id;
-    private String name;
-
 
     public Aggregate(String name, int id){
         this.name = name;
@@ -67,15 +64,25 @@ public class Aggregate implements Entity, Observer {
 
     @Override
     public void update(Observable observable, Object o) {
-        Entity.super.update(observable, o);
+        super.update(observable, o);
     }
 
     @Override
     public Clearance handleClearanceRequest(Document document, boolean isLast) {
-        Clearance clr = Entity.super.handleClearanceRequest(document, isLast);
+        Clearance clr = super.handleClearanceRequest(document, isLast);
         //todo to be completed
         document.addObserver(this);
         return clr;
     }
+
+    @Override
+    public boolean isEnd(){ return false; }
+
+    @Override
+    public ArrayList<Entity> getChildren_safe(){
+        //Returns a defensive copy
+        return new ArrayList<Entity>(this.subEntities);
+    }
+
 
 }

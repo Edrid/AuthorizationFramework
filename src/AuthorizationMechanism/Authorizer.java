@@ -6,7 +6,7 @@ import structure.Entity;
 import java.util.Observable;
 import java.util.Observer;
 
-public class Authorizer implements Handler {
+public class Authorizer implements Handler{
     protected Handler nextHandler = null;
     protected Entity realEntity;
     protected boolean isLast = false;
